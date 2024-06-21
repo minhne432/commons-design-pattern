@@ -1,4 +1,4 @@
-<?php
+<?
 
 class Database
 {
@@ -7,15 +7,15 @@ class Database
 
     private function __construct()
     {
-        $this->connection = new PDO('mysql:host=localhost;dbname=laravelapp', 'root', '');
+        $this->connection = new PDO('msql:host=localhost;dbname=laravelapp', 'root', '');
     }
-
 
     public static function getInstance()
     {
         if (self::$instance == null) {
             self::$instance = new Database();
         }
+
         return self::$instance;
     }
 
