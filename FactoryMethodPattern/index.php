@@ -1,19 +1,54 @@
 <?php
 
-require_once './IProduct.php';
-require_once './ConcreateProductA.php';
-require_once './ICreator.php';
-require_once './ConcreatorA.php';
+interface IProduct
+{
+  public function getName();
+}
 
-require_once './ConcreateProductB.php';
-require_once './ConcreatorB.php';
+interface ICreator
+{
+  public function factoryMethod(): IProduct;
+}
+
+
+class ConcreteProductA implements IProduct
+{
+  public function getName()
+  {
+    return "Product A \n";
+  }
+}
+
+class ConcreteProductB implements IProduct
+{
+  public function getName()
+  {
+    return "Product B \n";
+  }
+}
+
+class ConcreatorA implements ICreator
+{
+  public function factoryMethod(): IProduct
+  {
+    return new ConcreteProductA();
+  }
+}
+
+class ConcreatorB implements ICreator
+{
+  public function factoryMethod(): IProduct
+  {
+    return new ConcreteProductB();
+  }
+}
 
 
 $creatorA = new ConcreatorA();
 
 $productA = $creatorA->factoryMethod();
 
-echo $productA->getName() . "\n";
+echo $productA->getName();
 
 $creatorB = new ConcreatorB();
 
