@@ -16,39 +16,41 @@ interface IProductB
     public function getName();
 }
 
-class ConcreateFactory1 implements IAbstractFactory
+class concreteFactory1 implements IAbstractFactory
 {
+
     public function createProductA(): IProductA
     {
-        return new ConcreateProductA1();
+        return new ConcreteProductA1();
     }
 
     public function createProductB(): IProductB
     {
-        return new ConcreateProductB1();
+        return new ConcreteProductB1();
     }
 }
 
-class ConcreateProductA1 implements IProductA
+class ConcreteProductA1 implements IProductA
 {
     public function getName()
     {
-        return 'Product A1' . "\n";
+        return "Product A1 \n";
     }
 }
 
-class ConcreateProductB1 implements IProductB
+class ConcreteProductB1 implements IProductB
 {
     public function getName()
     {
-        return 'Product B1' . "\n";
+        return "Product B1 \n";
     }
 }
 
-$factory1 = new ConcreateFactory1();
 
-$productA = $factory1->createProductA();
-$productB = $factory1->createProductB();
+$factory  = new concreteFactory1();
+
+$productA = $factory->createProductA();
+$productB = $factory->createProductB();
 
 echo $productA->getName();
 echo $productB->getName();
