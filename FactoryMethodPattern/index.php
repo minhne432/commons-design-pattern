@@ -1,5 +1,6 @@
 <?php
 
+
 interface IProduct
 {
   public function getName();
@@ -9,7 +10,6 @@ interface ICreator
 {
   public function factoryMethod(): IProduct;
 }
-
 
 class ConcreteProductA implements IProduct
 {
@@ -42,7 +42,6 @@ class ConcreatorB implements ICreator
     return new ConcreteProductB();
   }
 }
-
 
 $creatorA = new ConcreatorA();
 
