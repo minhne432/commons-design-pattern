@@ -18,7 +18,6 @@ interface IProductB
 
 class concreteFactory1 implements IAbstractFactory
 {
-
     public function createProductA(): IProductA
     {
         return new ConcreteProductA1();
@@ -46,11 +45,12 @@ class ConcreteProductB1 implements IProductB
     }
 }
 
-
-$factory  = new concreteFactory1();
+$factory = new concreteFactory1();
 
 $productA = $factory->createProductA();
-$productB = $factory->createProductB();
 
 echo $productA->getName();
+
+$productB = $factory->createProductB();
+
 echo $productB->getName();
