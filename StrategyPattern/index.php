@@ -1,16 +1,74 @@
 <?php
 
-require './ShoppingCart.php';
-require './CreditCartPayment.php';
-require './PaypalPayment.php';
+interface PaymentStrategy
+{
+  public function pay($amount);
+}
+
+class CreditCardPayment implements PaymentStrategy
+{
+  private $name;
+  private $cardNumber;
+  private $cvv;
+  private $expiryDate;
+
+  public function __construct($name, $cardNumber, $cvv, $expiryDate)
+  {
+    $this->name = $name;
+    $this->cardNumber = $cardNumber;
+    $this->cvv = $cvv;
+    $this->expiryDate = $expiryDate;
+  }
+
+  public function pay($amount)
+  {
+    echo "Paid $amount using Credit Card. \n";
+  }
+}
+
+class PayPalPayment implements PaymentStrategy
+{
+  private $email;
+  private $password;
+
+  public function __construct($email, $password)
+  {
+    $this->email = $email;
+    $this->password = $password;
+  }
+
+  public function pay($amount)
+  {
+    echo "Paid $amount using Paypal. \n";
+  }
+}
+
+class ShoppingCart
+{
+  private $paymentStrategy;
+
+  public function setPaymentStrategy(PaymentStrategy $paymentStrategy)
+  {
+    $this->paymentStrategy = $paymentStrategy;
+  }
+
+  public function checkout($amount)
+  {
+    $this->paymentStrategy->pay($amount);
+  }
+}
+
 
 $cart = new ShoppingCart();
 
-$creditCartPayment = new CreditCartPayment("Minh", "616597356523653", "333", "25/12");
-$cart->setPaymentStrategy($creditCartPayment); //setter
-$cart->checkout(3000);
+$creditCardPayment = new CreditCardPayment('John Doe', '413414124242', '123', '7/14');
 
+$cart->setPaymentStrategy($creditCardPayment);
 
-$paypalCartPayment = new PaypalPayment("nh.minh0403@gmail.com", "password");
-$cart->setPaymentStrategy($paypalCartPayment); //setter
+$cart->checkout(1000);
+
+$paypalPayment = new PayPalPayment('email@example.com', 'password123');
+
+$cart->setPaymentStrategy($paypalPayment);
+
 $cart->checkout(2000);
