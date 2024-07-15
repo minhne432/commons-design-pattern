@@ -1,6 +1,6 @@
 <?php
 
-interface PaymentProcessorInterfac
+interface PaymentProcessorInterface
 {
   public function pay($amount);
 }
@@ -13,7 +13,7 @@ class NewPaymentGateway
   }
 }
 
-class PaymentGatewayAdapter implements PaymentProcessorInterfac
+class PaymentGatewayAdapter implements PaymentProcessorInterface
 {
 
   private $newPaymentGateway;
@@ -30,7 +30,7 @@ class PaymentGatewayAdapter implements PaymentProcessorInterfac
 }
 
 
-function processPayment(PaymentProcessorInterfac $paymentProcessor, $amount)
+function processPayment(PaymentProcessorInterface $paymentProcessor, $amount)
 {
   $paymentProcessor->pay($amount);
 }
