@@ -5,8 +5,10 @@ interface PaymentStrategy
   public function pay($amount);
 }
 
-class CreditCardPayment implements PaymentStrategy
+
+class CreditCardPayent implements PaymentStrategy
 {
+
   private $name;
   private $cardNumber;
   private $cvv;
@@ -22,12 +24,14 @@ class CreditCardPayment implements PaymentStrategy
 
   public function pay($amount)
   {
-    echo "Paid $amount using Credit Card. \n";
+    echo "Paid $amount using Credit Card.\n";
   }
 }
 
+
 class PayPalPayment implements PaymentStrategy
 {
+
   private $email;
   private $password;
 
@@ -39,7 +43,7 @@ class PayPalPayment implements PaymentStrategy
 
   public function pay($amount)
   {
-    echo "Paid $amount using Paypal. \n";
+    echo "Paid $amount using PayPal.\n";
   }
 }
 
@@ -58,17 +62,13 @@ class ShoppingCart
   }
 }
 
-
 $cart = new ShoppingCart();
 
-$creditCardPayment = new CreditCardPayment('John Doe', '413414124242', '123', '7/14');
-
+$creditCardPayment = new CreditCardPayent('John Doe', '1234567890123456', '123', '12/23');
 $cart->setPaymentStrategy($creditCardPayment);
+$cart->checkout(3000);
 
-$cart->checkout(1000);
 
-$paypalPayment = new PayPalPayment('email@example.com', 'password123');
-
-$cart->setPaymentStrategy($paypalPayment);
-
+$paypalPayment = new PayPalPayment('john.doe@example.com', 'password123');
+$cart->setPaymentStrategy($paypalPayment);;
 $cart->checkout(2000);
