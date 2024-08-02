@@ -12,8 +12,9 @@ interface Observer
   public function update($title, $content);
 }
 
-class NewsPublisher implements Subject
+class NewPublisher implements Subject
 {
+
   private $observers = [];
   private $title;
   private $content;
@@ -48,6 +49,7 @@ class NewsPublisher implements Subject
 
 class NewSubcriber implements Observer
 {
+
   private $name;
 
   public function __construct($name)
@@ -55,19 +57,22 @@ class NewSubcriber implements Observer
     $this->name = $name;
   }
 
+
   public function update($title, $content)
   {
-    echo "Hello {$this->name} a new article has been published: {$title} \n";
-    echo "Content: {$content} \n";
+    echo "Hello {$this->name}, a new article has been published: {$title}\n";
+    echo "Content: {$content}\n";
   }
 }
 
-$publisher = new NewsPublisher();
 
-$subcriber1 = new NewSubcriber("Minh");
-$subcriber2 = new NewSubcriber("Ly");
+$publisher = new NewPublisher();
+
+
+$subcriber1 = new NewSubcriber('Jonh');
+$subcriber2 = new NewSubcriber('Jane');
 
 $publisher->registerObserver($subcriber1);
 $publisher->registerObserver($subcriber2);
 
-$publisher->publishNews("Breaking News", "This is the content of the breaking news");
+$publisher->publishNews('Breaking News', 'This is the content of the breaking news.');
